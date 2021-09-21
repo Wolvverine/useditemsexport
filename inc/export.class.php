@@ -474,22 +474,25 @@ class PluginUseditemsexportExport extends CommonDBTM {
       global $DB, $CFG_GLPI;
 
       $items = [];
+      
       # TODO: select from menu
-      $fieldtablewithuser = 'glpi_plugin_fields_computeritemowners';
-      $fieldwithuser ='itemownerfield';
-         
+      $fieldsfieldwithuser = 'itemownerfield';
+      $fieldsitemtable = 'glpi_plugin_fields_';
+
       foreach ($CFG_GLPI['linkuser_types'] as $itemtype) {
          if (!($item = getItemForItemtype($itemtype))) {
             continue;
          }
          if ($item->canView()) {
+            $fieldsitemtablewithuser = strtolower("$fieldsitemtable" . "$item" . 'itemowners');
             $itemtable = getTableForItemType($itemtype);
-            $query = "SELECT * 
+
+            $query = "SELECT *
                       FROM `$itemtable`
-                      WHERE id 
-                      IN ( SELECT items_id
-                      FROM `$fieldtablewithuser`
-                      WHERE itemtype = '$itemtype' AND `itemownerfield` = '$ID')";
+                      WHERE `id`
+                      IN ( SELECT `items_id`
+                      FROM `$fieldsitemtablewithuser`
+                      WHERE `itemtype` = '$itemtype' AND `$fieldsfieldwithuser` = '$ID')";
 
             if ($item->maybeTemplate()) {
                $query .= " AND `is_template` = '0' ";
