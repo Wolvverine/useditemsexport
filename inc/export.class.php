@@ -489,7 +489,7 @@ class PluginUseditemsexportExport extends CommonDBTM {
                       WHERE id 
                       IN ( SELECT items_id
                       FROM `$fieldtablewithuser`
-                      WHERE itemtype = '$itemtype' AND `itemownerfield` = '$ID'')";
+                      WHERE itemtype = '$itemtype' AND `itemownerfield` = '$ID')";
 
             if ($item->maybeTemplate()) {
                $query .= " AND `is_template` = '0' ";
