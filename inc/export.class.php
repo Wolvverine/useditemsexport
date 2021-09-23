@@ -474,6 +474,10 @@ class PluginUseditemsexportExport extends CommonDBTM {
       global $DB, $CFG_GLPI;
 
       $items = [];
+      
+      # TODO: select from menu
+      $fieldsfieldwithuser = 'itemownerfield';
+      $fieldsitemtable = 'glpi_plugin_fields_';
 
       # TODO: select from menu in config
       $fieldsfieldwithuser = 'itemownerfield';
@@ -484,7 +488,11 @@ class PluginUseditemsexportExport extends CommonDBTM {
             continue;
          }
          if ($item->canView()) {
+<<<<<<< HEAD
             $fieldsitemtablewithuser = strtolower("$fieldsitemtable" . "$itemtype" . 'itemowners');
+=======
+            $fieldsitemtablewithuser = strtolower("$fieldsitemtable" . "$item" . 'itemowners');
+>>>>>>> 1038a8080c71841c28b65ba3ce483b301d0320f8
             $itemtable = getTableForItemType($itemtype);
 
             $query = "SELECT *
